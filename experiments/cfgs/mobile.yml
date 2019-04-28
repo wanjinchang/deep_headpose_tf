@@ -1,0 +1,8 @@
+EXP_DIR: mobile
+TRAIN:
+  IMS_PER_BATCH: 16
+  DISPLAY: 20
+  BATCH_SIZE: 16
+  DOUBLE_BIAS: False
+  ALPHA: 1.
+  SNAPSHOT_PREFIX: mobile_hopenet

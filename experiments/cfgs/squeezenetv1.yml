@@ -1,0 +1,8 @@
+EXP_DIR: squeezenetv1
+TRAIN:
+  IMS_PER_BATCH: 4
+  DISPLAY: 20
+  BATCH_SIZE: 4
+  DOUBLE_BIAS: False
+  ALPHA: 0.01
+  SNAPSHOT_PREFIX: squeezenetv1_hopenet

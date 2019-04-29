@@ -62,12 +62,12 @@ Or you can use my annotation files `300W_LP_headpose_anno.txt` under the folder 
   Run `python trainval_net.py` to train the model. 
   ```
   python trainval_net.py \
-      --cfg=experiment/cfg/mobile.yml \
-      --weight=data/imagenet_weights/mobile.ckpt \
-      --gpu_id=0 \
-      --data_dir=/home/oeasy/Downloads/dataset/head_pose/300W_LP_headpose \
-      --annotation_path=/home/oeasy/PycharmProjects/deep-head-pose-tf/300W_LP_headpose_anno.txt \
-      --net=mobile
+      --cfg experiment/cfg/mobile.yml \
+      --weight data/imagenet_weights/mobile.ckpt \
+      --gpu_id 0 \
+      --data_dir /home/oeasy/Downloads/dataset/head_pose/300W_LP_headpose \
+      --annotation_path /home/oeasy/PycharmProjects/deep-head-pose-tf/300W_LP_headpose_anno.txt \
+      --net mobile
   ```
   Please see details in the script `trainval_net.py`.
 By default, trained networks are saved under:

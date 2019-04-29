@@ -34,109 +34,6 @@ def get_list_from_filenames(file_path):
         pose_labels.append(pose)
     return lines, image_index, pose_labels
 
-class oeasy_headpose_DataSet():
-    # Head pose Data_Generator from oeasy_headpose dataset
-    def __init__(self, data_dir, annotation_path, interval=3, batch_size=32, target_size=(224, 224), img_ext='.jpg'):
-        self.data_dir = data_dir
-        self.img_ext = img_ext
-        self.interval = interval
-        self.batch_size = batch_size
-        self.target_size = target_size
-        self.X_train = []
-        self.Y_train = []
-
-        self.load_props_dict(annotation_path)
-        self.load_all_sample(data_dir)
-        # self.y_train = filename_list
-        self.length = len(self.X_train)
-
-    def load_props_dict(self, annotation_path):
-        f = open(annotation_path, "r")
-        all_img_props = [x.strip().split(",") for x in f.readlines()]
-        img_props_dict = {}
-        for props in all_img_props:
-            if len(props) != 4:
-                print("props len is not right" + str(props))
-                continue
-            else:
-                img_props_dict[props[0]] = props
-        self.img_props_dict = img_props_dict
-
-    def load_all_sample(self, data_dir):
-        img_paths = os.listdir(data_dir)
-        for img_path in img_paths:
-            cur_dir = os.path.join(data_dir, img_path)
-            if (os.path.isdir(cur_dir)):
-                self.load_all_sample(cur_dir)
-            else:
-                if cur_dir[-3:] not in ["png", "jpg"]:
-                    print(cur_dir + " not img")
-                    continue
-                props = self.img_props_dict.get(img_path)
-                if not props:
-                    print(cur_dir + " has no props loaded")
-                else:
-                    self.X_train.append(cur_dir)
-                    y_ary = [float(props[pose_idx_dict["yaw"]]), float(
-                        props[pose_idx_dict["pitch"]]), float(props[pose_idx_dict["roll"]])]
-                    self.Y_train.append(y_ary)
-
-    def _next_batch(self):
-        start_idx = 0
-        while True:
-            images_index_batch = self.X_train[start_idx:start_idx + self.batch_size]
-            pose_labels_batch = self.Y_train[start_idx:start_idx + self.batch_size]
-            # print('>>>>>', batch_annos)
-
-            # generate batch image data and labels
-            images = []
-            labels = []
-            labels_cont = []
-            for i in range(self.batch_size):
-                img_path = os.path.join(self.data_dir, images_index_batch[i])
-                img = cv2.imread(img_path)
-                im_orig = img.astype(np.float32, copy=True)
-                im_orig -= cfg.PIXEL_MEANS
-
-                # image data
-                # ds = 1 + np.random.randint(0, 4) * 5
-                # original_size = im_orig.size
-                # img = cv2.resize(im_orig, (im_orig.size[0] / ds, im_orig.size[1] / ds))
-                # img = cv2.resize(img, (original_size[0], original_size[1]))
-                img = cv2.resize(im_orig, (227, 227))
-
-                yaw = pose_labels_batch[i][0]
-                pitch = pose_labels_batch[i][1]
-                roll = pose_labels_batch[i][2]
-
-                # Flip?
-                rnd = np.random.random_sample()
-                if rnd < 0.5:
-                    yaw = -yaw
-                    roll = -roll
-                    img = cv2.flip(img, 1)
-
-                images.append(img)
-
-                # Bin labels
-                bins = np.array(range(-99, 102, self.interval))
-                binned_pose = np.digitize([yaw, pitch, roll], bins) - 1
-                labels.append(binned_pose)
-
-                # Cont labels
-                labels_cont.append([yaw, pitch, roll])
-
-            images = np.array(images, dtype='float32')
-            labels = np.array(labels)
-            labels_cont = np.array(labels_cont)
-
-            yield (images, labels, labels_cont)
-
-            # Update start index for the next batch
-            start_idx += self.batch_size
-            if start_idx >= self.length:
-                start_idx = 0
-
 class Pose_300W_LP_DataSet():
     # Head pose Data_Generator from 300W-LP dataset
     def __init__(self, data_dir, annotation_path, interval=3, batch_size=32, target_size=(224, 224), img_ext='.jpg'):
@@ -177,7 +74,7 @@ class Pose_300W_LP_DataSet():
                 # original_size = im_orig.size
                 # img = cv2.resize(im_orig, (im_orig.size[0] / ds, im_orig.size[1] / ds))
                 # img = cv2.resize(img, (original_size[0], original_size[1]))
-                img = cv2.resize(im_orig, (227, 227))
+                img = cv2.resize(im_orig, (224, 224))
 
                 yaw = pose_labels_batch[i][0]
                 pitch = pose_labels_batch[i][1]

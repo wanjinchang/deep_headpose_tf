@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # --------------------------------------------------------
-# Tensorflow Faster R-CNN
 # Licensed under The MIT License [see LICENSE for details]
 # Written by Xinlei Chen, based on code from Ross Girshick
 # --------------------------------------------------------
@@ -112,9 +111,6 @@ if __name__ == '__main__':
     elif demonet == 'mobile':
         print('hopenet base_network is mobilenet_v1')
         net = mobilenetv1()
-    # elif demonet == 'darknet53':
-    #     print('ssh base_network is darknet53')
-    #     net = Darknet53()
     elif demonet == 'mobile_v2':
         print('hopenet base_network is mobilenet_v2')
         net = mobilenetv2()
@@ -151,25 +147,5 @@ if __name__ == '__main__':
     # demo(sess, net, '0_Parade_marchingband_1_333.jpg')
     # # # plt.show()
 
-    ############### test inference time ###################################
-    # total_time = 0
-    # for i in range(10000):
-    #     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    #     print('Demo for data/demo/{} {}'.format('oeasy_2.jpg', str(i)))
-    #     once_time = demo(sess, net, 'oeasy_2.jpg')
-    #     if i > 10:
-    #         total_time += once_time
-    # avg_inference_time = total_time / 10000
-    # print('the inference time for {}_ssh took {:.3f}s'.format(demonet, avg_inference_time))
-
-    # while True:
-    #     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    #     print('Demo for data/demo/{}'.format('19.jpeg'))
-    #     demo(sess, net, '19.jpeg')
-        # plt.show()
-    # demo(sess, net, 'oeasy_1.jpg')
-    # plt.show()
-    # plt.show()
-    #
 
 

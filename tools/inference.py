@@ -20,7 +20,6 @@ from model.config import cfg
 input_tensor = tf.placeholder(tf.float32, shape=[1, None, None, 3])
 
 PATH_TO_PB = '/home/oeasy/PycharmProjects/deep-head-pose-tf/output/mobile/Pose_300W_LP/default_alpha_0.01/pb_ckpt_1.2/mobilev1_headpose.pb'
-# PATH_TO_CKPT = '/home/oeasy/PycharmProjects/tf-ssh_modify/output/vgg16/wider_face_train/pb_ckpt_1.4/vgg16_ssh_three_branches.pb'
 
 def load_model():
     # Check if the model is a model directory (containing a metagraph and a checkpoint file)
@@ -64,33 +63,7 @@ def run_inference_for_one_image(image):
     return result_dict
 
 if __name__ == '__main__':
-    # detection_graph = import_graph()
-    # im_names = os.listdir(PATH_TO_TEST_IMAGES_DIR)
     model_headpose = init_headpose_network()
-    # for im_name in im_names:
-    #     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    #     print('Demo for {}'.format(im_name))
-    #     # im = cv2.imread(os.path.join(PATH_TO_TEST_IMAGES_DIR, im_name))
-    #     im = cv2.imread(os.path.join(PATH_TO_TEST_IMAGES_DIR, '4c059278d0f9254d0b077df3473755f83bb65cb3.jpg'))
-    #     print('>>>>>', im.shape[0], im.shape[1])
-    #     timer = Timer()
-    #     timer.tic()
-    #     boxes = run_inference_for_one_image(im)
-    #     timer.toc()
-    #     print('Detection took {:.3f}s'.format(timer.total_time))
-    #     print('>>>>>faces:', boxes.shape[0])
-
-
-    # run_inference_for_images(PATH_TO_TEST_IMAGES_DIR, im_names, detection_graph)
-
-    # print('>>>>', im_names)
-    # for im_name in im_names:
-    #     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    #     print('Demo for {}'.format(im_name))
-    #     im = cv2.imread(os.path.join(PATH_TO_TEST_IMAGES_DIR, im_name))
-    #     print('>>>>>', im.shape[0], im.shape[1])
-    #     boxes = run_inference_for_single_image(im, detection_graph)
-    #     print('>>>>>faces', boxes.shape[0])
 
     ########################## write annotation txt file #############################################
     model_predtxt = open('../mobile_Pose_300W_LP_test_AFLW2000_headpose_alpha_0.01', 'w')

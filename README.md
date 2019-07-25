@@ -25,7 +25,7 @@ This is a TensorFlow implementation of [Fine-Grained Head Pose Estimation Withou
 
 ## Setup_data
 
-Usr the script ``python utils/data_preprocess.py`` to generate your own annotation file and face images from 300W-LP dataset.
+Use the script ``python utils/data_preprocess.py`` to generate your own annotation file and face images from 300W-LP dataset.
     One row for one image;  
     Row format: `image_file_path pitch raw roll`;  
     Here is an example:

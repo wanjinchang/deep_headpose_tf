@@ -6,7 +6,7 @@ This is a TensorFlow implementation of [Fine-Grained Head Pose Estimation Withou
 ### Prerequisites
 
 1. You need a CUDA-compatible GPU to train the model.
-2. You should first download [300W-LP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm) for face detection.
+2. You should first download [300W-LP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm) for head pose estimation.
 
 ### Dependencies
 
